@@ -1,4 +1,5 @@
 const TeleBot = require('telebot')
+const hx = require('hxz-api')
 global.tokebot = '1936402328:AAG8rZmwhIdUBNav5quEUfxFNhKCamRxgLE'
 global.ownerid = '1240615992'
 
@@ -35,7 +36,6 @@ bot.on(['/menu'], async (msg) => {
 by @theodorickalfa09
 
 /ytmp4 [url]
-/ytmp3 [url]
 `)
 })
 
@@ -45,7 +45,15 @@ return bot.sendMessage
 `)
 })
 
-
+bot.on(/^\/ytmp4 (.+)$/, async (msg, props) => {
+    let url = await props.match[1];
+    await msg.reply.text('Sedang Diproses…')
+    hx.youtube(link)
+    .then(result => {
+      return await bot.sendMessage(msg.chat.id, `${result}`)
+     })
+   })
+ })
 
 
 
